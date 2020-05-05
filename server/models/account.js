@@ -1,5 +1,6 @@
 // *Accounts:*
 
+// - userId - int
 // - account_name - string
 // - interest_rate - decimal
 // - account_type - int (0 = current account, 1 = high interest, 2 = investment instrument)

@@ -4,58 +4,38 @@ const bodyParser = require('body-parser');
 
 // Delegated Routers
 const userRouter = require('./routes/userRoutes');
+const accountRouter = require('./routes/accountRoutes');
+const balanceRouter = require('./routes/balanceRoutes');
+const inflowRouter = require('./routes/inflowRoutes');
+const transferRouter = require('./routes/transferRoutes');
+
 
 // Set up APP
 const app = express();
 const PORT = 3000;
 
+
 // Global Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
 // Route delegations
 app.use('/api/users', userRouter);
+app.use('/api/accounts', accountRouter);
+app.use('/api/balances', balanceRouter);
+app.use('/api/inflows', inflowRouter);
+app.use('/api/transfers', transferRouter);
 
 
-// Global Routes
-app.get('/',
-  (req, res, next) => {
-    console.log('Request received');
-    next();
-  }
-)
-
-
-
-// API Section
-
-
-
-
-
-// ACCOUNTS
-// accounts/ - list of all accounts (GET)
-// accounts/new - create a new account (GET = form, POST = action)
-// accounts/:id  - view or update an account (GET - view, POST - update, DELETE - delete)
-
-// BALANCES
-// balance/ - List of all
-// balance/new
-// balance/:id
-
-// INFLOW
-// inflow/
-// inflow/new
-// inflow/:id
-
-// TRANSFER
-// transfer/
-// transfer/new
-// transfer/:id
+// 404 Handler
+app.use((req, res) => {
+  res.send("404: Page not found", 404);
+});
 
 
 // Global Error Handler
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });

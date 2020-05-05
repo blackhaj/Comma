@@ -1,4 +1,7 @@
 const Sequelize = require('sequelize');
+const bcrypt = require('bcryptjs');
+const SALT_WORK_FACTOR = 10;
+
 // import models
 const UserModel = require('./user');
 const AccountModel = require('./account');
@@ -10,6 +13,21 @@ const TransferModel = require('./transfer');
 const sequelize = new Sequelize('postgres://txkssrig:JkSMqInptoHlTPrtIiPUf3iMWXwWGJfy@drona.db.elephantsql.com:5432/txkssrig');
 
 const User = UserModel(sequelize, Sequelize);
+User.beforeCreate((user) => {
+  return bcrypt.hash(user.password, SALT_WORK_FACTOR)
+    .then((hash) => {
+      user.password = hash;
+    })
+    .catch((error) => {
+      if(error) throw Error("Error with Bcypt hashing");
+    });
+});
+
+// NOT YET TESTED AS SESSIONS NOT SET UP - https://stackoverflow.com/questions/34120548/using-bcrypt-with-sequelize-model
+User.prototype.checkPassword = async function(password) {
+  return await bcrypt.compare(password, this.password)
+};
+
 const Account = AccountModel(sequelize, Sequelize);
 const Balance = BalanceModel(sequelize, Sequelize);
 const Inflow = InflowModel(sequelize, Sequelize);
@@ -35,10 +53,10 @@ Inflow.belongsTo(Account);
 User.hasMany(Transfer);
 Transfer.belongsTo(User);
 
-sequelize.sync()
-  .then(() => {
-    console.log('DB up to date');
-  });
+// sequelize.sync()
+//   .then(() => {
+//     console.log('DB up to date');
+//   });
 
 
 module.exports = {
