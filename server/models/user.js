@@ -14,14 +14,16 @@ module.exports = (sequelize, type) => {
     },
     password: {
       type: type.STRING,
-      len: [5,50],
+      len: [5, 50],
       allowNull: false,
+      notEmpty: true,
     },
     dob: type.DATEONLY,
     targetRetirementAge: type.INTEGER,
     deleted: {
       type: type.BOOLEAN,
       defaultValue: false,
+      allowNull: false,
     },
   });
 };

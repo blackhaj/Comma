@@ -14,6 +14,14 @@ module.exports = (sequelize, type) => {
       primaryKey: true,
       autoIncrement: true,
     },
+    userId: {
+      type: type.INTEGER,
+      references: {
+        model: "users", // 'persons' refers to table name
+        key: "id", // 'id' refers to column name in persons table
+      },
+      allowNull: false,
+    },
     accountName: {
       type: type.STRING,
       allowNull: false,
@@ -23,11 +31,14 @@ module.exports = (sequelize, type) => {
     accountType: {
       type: type.ENUM,
       values: ['current', 'savings', 'investment'],
+      allowNull: false,
     },
     isin: type.STRING,
     assetClass: {
       type: type.ENUM,
       values: ['shares', 'bonds', 'cash'],
+      allowNull: false,
+      defaultValue: 'cash',
     },
     deleted: {
       type: type.BOOLEAN,

@@ -18,6 +18,7 @@ module.exports = (sequelize, type) => {
         model: "accounts", // 'persons' refers to table name
         key: "id", // 'id' refers to column name in persons table
       },
+      allowNull: false,
     },
     accountTo: {
       type: type.INTEGER,
@@ -25,12 +26,20 @@ module.exports = (sequelize, type) => {
         model: "accounts", // 'persons' refers to table name
         key: "id", // 'id' refers to column name in persons table
       },
+      allowNull: false,
     },
-    date: type.DATEONLY,
-    amount: type.DECIMAL,
+    date: {
+      type: type.DATEONLY,
+      allowNull: false,
+    },
+    amount: {
+      type: type.DECIMAL,
+      allowNull: false,
+    },
     deleted: {
       type: type.BOOLEAN,
       defaultValue: false,
+      allowNull: false,
     },
   });
 };

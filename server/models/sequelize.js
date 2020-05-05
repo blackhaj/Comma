@@ -33,27 +33,27 @@ const Balance = BalanceModel(sequelize, Sequelize);
 const Inflow = InflowModel(sequelize, Sequelize);
 const Transfer = TransferModel(sequelize, Sequelize);
 
-// Accounts
-User.hasMany(Account);
-Account.belongsTo(User);
+// // Accounts
+// User.hasMany(Account);
+// Account.belongsTo(User);
 
-// Balances
-User.hasMany(Balance);
-Balance.belongsTo(User);
-Account.hasMany(Balance);
-Balance.belongsTo(Account);
+// // Balances
+// User.hasMany(Balance);
+// Balance.belongsTo(User);
+// Account.hasMany(Balance);
+// Balance.belongsTo(Account);
 
-// Inflows
-User.hasMany(Inflow);
-Inflow.belongsTo(User);
-Account.hasMany(Inflow);
-Inflow.belongsTo(Account);
+// // Inflows
+// User.hasMany(Inflow);
+// Inflow.belongsTo(User);
+// Account.hasMany(Inflow);
+// Inflow.belongsTo(Account);
 
-// Transfer
-User.hasMany(Transfer);
-Transfer.belongsTo(User);
+// // Transfer
+// User.hasMany(Transfer);
+// Transfer.belongsTo(User);
 
-// sequelize.sync()
+// sequelize.sync({force: true})
 //   .then(() => {
 //     console.log('DB up to date');
 //   });
