@@ -5,37 +5,19 @@
 
 const express = require('express');
 const router = express.Router();
-const accountController = require('../controllers/accountController');
+const controllers = require('../controllers/accountController');
 
-router.post('/new',
-  accountController.createAccount,
-  (req, res) => {
-    res.set(200).json(res.locals.message);
-  },
-);
+// accounts/
+router
+  .route('/')
+  .get(controllers.readMany)
+  .post(controllers.createOne);
 
-// GET users/:id 
-router.get('/:id',
-  accountController.readAccount,
-  (req, res) => {
-    res.set(200).json(res.locals.account);
-  },
-);
-
-// POST users/:id
-router.post('/:id',
-  accountController.updateAccount,
-  (req, res) => {
-    res.set(200).json(res.locals.message);
-  },
-);
-
-// DELETE users/:id
-router.delete('/:id',
-  accountController.deleteAccount,
-  (req, res) => {
-    res.set(200).json(res.locals.message);
-  },
-);
+// accounts/:id
+router
+  .route('/:id')
+  .get(controllers.readOne)
+  .put(controllers.updateOne)
+  .delete(controllers.deleteOne);
 
 module.exports = router;

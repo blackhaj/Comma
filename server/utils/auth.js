@@ -80,7 +80,7 @@ const protect = async (req, res, next) => {
       },
       // Only send back required information
       attributes: {
-        exclude: ["id", "password", "deleted", "createdAt", "updatedAt"],
+        exclude: ["password", "deleted", "createdAt", "updatedAt"],
       },
     });
     req.user = user.dataValues;

@@ -24,7 +24,7 @@ const readOne = model => async (req, res, next) => {
 
 const readMany = model => async (req, res, next) => {
   try {
-    const docs = await model.findAll({
+    let docs = await model.findAll({
       where: {
         userId: req.user.id,
         deleted: false,
@@ -55,19 +55,20 @@ const createOne = model => async (req, res, next) => {
 
 const updateOne = model => async (req, res, next) => {
   try {
-    const { id, deleted, createdAt, updatedAt, ...data} = req.body;
+    const { id, createdAt, updatedAt, ...data} = req.body;
     const updated = await model.update({
       ...data,
     }, {
+      returning: true,
       where: {
-        userId: req.user.id;
+        userId: req.user.id,
+        id: req.params.id,
       },
     });
-    if (!updated) {
+    if (updated[0] === 0) {
       return res.status(400).end();
     }
-    const { password, ...cleaned } = updated.dataValues;
-    res.status(200).json({ data: cleaned });
+    res.status(200).json({ data: updated[1][0].dataValues });
   } catch (error) {
     return next(error);
   }
@@ -79,24 +80,27 @@ const deleteOne = model => async (req, res, next) => {
     const deletedDoc = await model.update({
       deleted: true,
     }, {
+      returning: true,
       where: {
         userId: req.user.id,
-        id: req.params.id
+        id: req.params.id,
       },
     });
-    if (!deletedDoc) {
+    if (deletedDoc[0] === 0) {
       return res.status(400).end();
     }
-    res.status(200).json({ data: deletedDoc.dataValues });
+    res.status(200).json({ data: deletedDoc[1][0].dataValues });
   } catch (error) {
     return next(error);
   }
 };
 
-module.exports = crudControllers = model => ({
-  readOne: readOne(model),
-  readMany: readMany(model),
-  createOne: createOne(model),
-  updateOne: updateOne(model),
-  deleteOne: deleteOne(model),
-})
+module.exports.crudControllers = (model) => {
+  return {
+    readOne: readOne(model),
+    readMany: readMany(model),
+    createOne: createOne(model),
+    updateOne: updateOne(model),
+    deleteOne: deleteOne(model),
+  };
+};
