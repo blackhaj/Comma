@@ -1,36 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const balanceController = require('../controllers/balanceController');
+const controllers = require('../controllers/balanceController');
 
-router.post('/new',
-  balanceController.createBalance,
-  (req, res) => {
-    res.set(200).json(res.locals);
-  },
-);
+// balances/
+router
+  .route('/')
+  .get(controllers.readMany)
+  .post(controllers.createOne);
 
-// GET users/:id 
-router.get('/:id',
-  balanceController.readBalance,
-  (req, res) => {
-    res.set(200).json(res.locals.balance);
-  },
-);
-
-// POST users/:id
-router.post('/:id',
-  balanceController.updateBalance,
-  (req, res) => {
-    res.set(200).json(res.locals);
-  },
-);
-
-// DELETE users/:id
-router.delete('/:id',
-  balanceController.deleteBalance,
-  (req, res) => {
-    res.set(200).json(res.locals);
-  },
-);
+// balances/:id
+router
+  .route('/:id')
+  .get(controllers.readOne)
+  .put(controllers.updateOne)
+  .delete(controllers.deleteOne);
 
 module.exports = router;

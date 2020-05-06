@@ -12,6 +12,14 @@ module.exports = (sequelize, type) => {
       primaryKey: true,
       autoIncrement: true,
     },
+    userId: {
+      type: type.INTEGER,
+      references: {
+        model: "users",
+        key: "id",
+      },
+      allowNull: false,
+    },
     accountFrom: {
       type: type.INTEGER,
       references: {

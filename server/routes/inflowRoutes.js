@@ -1,40 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const inflowController = require('../controllers/inflowController');
+const controllers = require('../controllers/inflowController');
 
+// inflow/
+router
+  .route('/')
+  .get(controllers.readMany)
+  .post(controllers.createOne);
 
-// id: INTEGER,
-// date: type.DATEONLY,
-// amount: type.DECIMAL,
-// category: ['income', 'one-off']
-// deleted: BOOLEAN,
-
-router.post('/new',
-  inflowController.createInflow,
-  (req, res) => {
-    res.set(200).json(res.locals);
-  },
-);
-
-router.get('/:id',
-  inflowController.readInflow,
-  (req, res) => {
-    res.set(200).json(res.locals);
-  },
-);
-
-router.post('/:id',
-inflowController.updateInflow,
-  (req, res) => {
-    res.set(200).json(res.locals);
-  },
-);
-
-router.delete('/:id',
-  inflowController.deleteInflow,
-  (req, res) => {
-    res.set(200).json(res.locals);
-  },
-);
+// inflow/:id
+router
+  .route('/:id')
+  .get(controllers.readOne)
+  .put(controllers.updateOne)
+  .delete(controllers.deleteOne);
 
 module.exports = router;

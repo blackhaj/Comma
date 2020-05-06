@@ -1,8 +1,3 @@
-// ACCOUNTS
-// accounts/ - list of all accounts (GET)
-// accounts/new - create a new account (GET = form, POST = action)
-// accounts/:id  - view or update an account (GET - view, POST - update, DELETE - delete)
-
 const express = require('express');
 const router = express.Router();
 const controllers = require('../controllers/accountController');

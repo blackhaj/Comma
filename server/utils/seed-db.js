@@ -181,7 +181,7 @@ let investmentAccounts = [
   },
 ];
 
-
+let retirementAge = [60, 65, 70];
 
 // ONE - create all the users
 // for (let i = 0; i < usersArray.length; i++) {
@@ -237,30 +237,30 @@ let investmentAccounts = [
 //     });
 //   });
 
-// SIX - For each Account, create a balance history
+// // SIX - For each Account, create a balance history
 
-Account.findAll()
-  .then((response)=> {
-    response.forEach(element => {
-      let accountId = element.dataValues.id;
-      let userId = element.dataValues.userId;
-      let accountType = element.dataValues.accountType;
-      // Current Account
-      for (let x = 0; x < 12; x++) {
-        let balanceAmount;
-        if (accountType === 'current') {
-          balanceAmount = 1000 + 100 * x * Math.random()
-        } else if (accountType === 'savings') {
-          balanceAmount = 1000 + (100 * element.dataValues.interestRate) / 100
-        } else (
-          balanceAmount = 1000 + (100 * Math.random() * 2 - Math.random() * 100)
-        );
-        Balance.create({
-          userId: userId,
-          accountId: accountId,
-          date: `2019-${x + 1}-01`,
-          balance: balanceAmount,
-        });
-      }
-    });
-  });
+// Account.findAll()
+//   .then((response)=> {
+//     response.forEach(element => {
+//       let accountId = element.dataValues.id;
+//       let userId = element.dataValues.userId;
+//       let accountType = element.dataValues.accountType;
+//       // Current Account
+//       for (let x = 0; x < 12; x++) {
+//         let balanceAmount;
+//         if (accountType === 'current') {
+//           balanceAmount = 1000 + 100 * x * Math.random()
+//         } else if (accountType === 'savings') {
+//           balanceAmount = 1000 + (100 * element.dataValues.interestRate) / 100
+//         } else (
+//           balanceAmount = 1000 + (100 * Math.random() * 2 - Math.random() * 100)
+//         );
+//         Balance.create({
+//           userId: userId,
+//           accountId: accountId,
+//           date: `2019-${x + 1}-01`,
+//           balance: balanceAmount,
+//         });
+//       }
+//     });
+//   });
