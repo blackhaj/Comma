@@ -32,6 +32,8 @@ accountController.createAccount = async (req, res, next) => {
 
 // READ an account
 accountController.readAccount = async (req, res, next) => {
+  console.log("IN ACCOUNT - USER BELOW");
+  console.log(req.user);
   try {
     const account = await Account.findOne({
       where: {

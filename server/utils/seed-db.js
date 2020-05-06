@@ -181,22 +181,6 @@ let investmentAccounts = [
   },
 ];
 
-// ['FTSE All-World High Dividend Yield UCITS ETF (VHYL)',
-// 'S&P 500 UCITS ETF (VUSA)',
-// 'U.K. Inflation-Linked Gilt Index Fund - Gross Accumulation',
-// 'Pension Bee Tracker Plan',
-// 'Legal & General Cash Trust',
-// 'iShare Overseas Government Bond Index',
-// 'iShare Overseas Corporate Bond Index',
-// 'iShares Global Property Equity',
-// 'Fidelity Index World']
-
-// ['LU0321464652',
-// 'IE00B4WXJK79',
-// 'LU0641006290',
-// 'IE00B5L65R35',
-// 'IE00B1FZSD53',
-// 'IE00B2NPKV68']
 
 
 // ONE - create all the users
@@ -280,62 +264,3 @@ Account.findAll()
       }
     });
   });
-
-// for (let j = 0; j < 2; j++) {
-//   accountIdSim++
-//   // Create Current Account
-//   let account = Account.create({
-//     userId: userIdSim,
-//     accountName: currentAccounts[Math.floor(Math.random() * 10)],
-//     accountType: "current",
-//   });
-//   for (let x = 0; x < 12; x++) {
-//     Balance.create({
-//       userId: userIdSim,
-//       accountId: accountIdSim,
-//       date: `2019-${x + 1}-01`,
-//       balance: 1000 + 100 * x * Math.random(),
-//     });
-//   }
-// }
-
-// for (let j = 0; j < 2; j++) {
-//   accountIdSim++
-//   // Create Savings Account
-//   let chosen = savingAccounts[Math.floor(Math.random() * 11)];
-//   let account = Account.create({
-//     userId: userIdSim,
-//     accountName: chosen.accountName,
-//     interestRate: chosen.interestRate,
-//     accountType: "savings",
-//   });
-//   for (let x = 0; x < 12; x++) {
-//     Balance.create({
-//       userId: userIdSim,
-//       accountId: accountIdSim,
-//       date: `2019-${x + 1}-01`,
-//       balance: 1000 + (100 * chosen.interestRate) / 100,
-//     });
-//   }
-// }
-
-// for (let j = 0; j < 5; j++) {
-//   accountIdSim++
-//   // Create Invesment Account
-//   let chosen = investmentAccounts[Math.floor(Math.random() * 9)];
-//   let account = Account.create({
-//     userId: userIdSim,
-//     accountName: chosen.accountName,
-//     accountType: "investment",
-//     assetClass: chosen.assetClass,
-//     isin: chosen.isin,
-//   });
-//   for (let x = 0; x < 12; x++) {
-//     Balance.create({
-//       userId: userIdSim,
-//       accountId: accountIdSim,
-//       date: `2019-${x + 1}-01`,
-//       balance: 1000 + (100 * Math.random() * 2 - Math.random() * 100),
-//     });
-//   }
-// }

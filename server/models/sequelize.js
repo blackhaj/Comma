@@ -23,35 +23,14 @@ User.beforeCreate((user) => {
     });
 });
 
-// NOT YET TESTED AS SESSIONS NOT SET UP - https://stackoverflow.com/questions/34120548/using-bcrypt-with-sequelize-model
-User.prototype.checkPassword = async function(password) {
-  return await bcrypt.compare(password, this.password)
+User.prototype.checkPassword = async function (password) {
+  return await bcrypt.compare(password, this.password); // return statement needed!
 };
 
 const Account = AccountModel(sequelize, Sequelize);
 const Balance = BalanceModel(sequelize, Sequelize);
 const Inflow = InflowModel(sequelize, Sequelize);
 const Transfer = TransferModel(sequelize, Sequelize);
-
-// // Accounts
-// User.hasMany(Account);
-// Account.belongsTo(User);
-
-// // Balances
-// User.hasMany(Balance);
-// Balance.belongsTo(User);
-// Account.hasMany(Balance);
-// Balance.belongsTo(Account);
-
-// // Inflows
-// User.hasMany(Inflow);
-// Inflow.belongsTo(User);
-// Account.hasMany(Inflow);
-// Inflow.belongsTo(Account);
-
-// // Transfer
-// User.hasMany(Transfer);
-// Transfer.belongsTo(User);
 
 // sequelize.sync({force: true})
 //   .then(() => {
@@ -78,4 +57,3 @@ module.exports = {
 // Sequelize docs - https://sequelize.org/master/manual/getting-started.html
 // https://github.com/sequelize/express-example
 // https://stackabuse.com/using-sequelize-orm-with-nodejs-and-express/
-
