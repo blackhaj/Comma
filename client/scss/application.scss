@@ -1,0 +1,91 @@
+$white: #FFFFFF;
+$lightBlue: #4BA4F4;
+$hotPink: #E02542;
+$grey: #B1B1B1;
+$darkBlue: #212745;
+
+* {
+  margin: 0;
+  padding: 0;
+  border: green solid 1px;
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+}
+
+h1 {
+  color: $lightBlue;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+#appContainer {
+  height: 667px;
+  width: 375px;
+  margin: auto;
+  position: relative;
+}
+
+#main-container {
+  height: 100%;
+  width: 100%;
+}
+
+.title-bar {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.title {
+  display: flex;
+  margin-left: 10px;
+  font-size: 25px;
+  font-weight: 600;
+  color: $darkBlue;
+}
+
+.title-text {
+  margin: auto auto 0 auto;
+}
+
+.account-icon {
+  padding: 10px;
+  display: flex;
+}
+
+.profile-icon {
+  margin: auto;
+  height: 35px;
+  width: 35px;
+  fill: $hotPink;
+}
+
+.card {
+  width: 355px;
+  margin: 10px;
+  min-height: 250px;
+  padding: 10px;
+}
+
+// .modebar{
+//   display: none !important;
+// }
+
+.navbar-container {
+  width: 100%;
+  height: 75px;
+  display: flex;
+  position: absolute;
+  bottom: 0px;
+}
+
+.nav-item {
+  margin: auto;
+  font-size: 1.3rem;
+}

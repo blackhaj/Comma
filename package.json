@@ -4,8 +4,9 @@
   "description": "A personal finance dashboard",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server/server.js"
+    "start": "NODE_ENV=production nodemon server/server.js",
+    "build": "NODE_ENV=production webpack",
+    "dev": "NODE_ENV=development webpack-dev-server --open & NODE_ENV=development nodemon server/server.js"
   },
   "repository": {
     "type": "git",
@@ -23,12 +24,29 @@
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "nodemon": "^2.0.3",
     "pg": "^8.0.3",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^5.21.7"
+    "plotly.js": "^1.54.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-plotly.js": "^2.4.0",
+    "react-router-dom": "^5.1.2",
+    "sequelize": "^5.21.7",
+    "webpack": "^4.43.0"
   },
   "devDependencies": {
-    "sequelize-cli": "^5.5.1"
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-react": "^7.9.4",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.5.3",
+    "file-loader": "^6.0.0",
+    "node-sass": "^4.14.1",
+    "nodemon": "^2.0.3",
+    "sass-loader": "^8.0.2",
+    "sequelize-cli": "^5.5.1",
+    "style-loader": "^1.2.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   }
 }
