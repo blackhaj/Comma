@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import TitleBar from '../TitleBar.jsx';
 
 export default class History extends Component {
   render() {
     return (
       <div>
-        <h1>History</h1>
+        <TitleBar title={"History"} />
       </div>
     )
   }

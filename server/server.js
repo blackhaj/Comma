@@ -1,6 +1,7 @@
 const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser');
 
 // Delegated Routers
 const userRouter = require("./routes/userRoutes");
@@ -8,7 +9,7 @@ const accountRouter = require("./routes/accountRoutes");
 const balanceRouter = require("./routes/balanceRoutes");
 const inflowRouter = require("./routes/inflowRoutes");
 const transferRouter = require("./routes/transferRoutes");
-const { signUp, signIn, protect } = require("./utils/auth");
+const { signUp, signIn, protect, checkCookie } = require("./utils/auth");
 
 // Set up APP
 const app = express();
@@ -17,10 +18,12 @@ const PORT = 3000;
 // Global Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Route delegations
-app.use("/signup", signUp);
-app.use("/signin", signIn);
+app.use("/api/signup", signUp);
+app.use("/api/signin", signIn);
+app.use('/api/session', checkCookie);
 app.use("/api", protect);
 app.use("/api/users", userRouter);
 app.use("/api/accounts", accountRouter);
@@ -30,7 +33,6 @@ app.use("/api/transfers", transferRouter);
 
 
 // App Routes
-console.log(process.env.NODE_ENV)
 if (process.env.NODE_ENV === "production") {
   app.use("/build", express.static(path.join(__dirname, "../build")));
   app.get('/*', (req, res) => {

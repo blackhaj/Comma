@@ -3,7 +3,7 @@ const { User } = require("../models/sequelize");
 
 const secrets = {
   jwt: "donotsharethisshitwithnoone",
-  jwtExp: "30m",
+  jwtExp: "30d",
 };
 
 // Must be passed a user object with .id key
@@ -54,7 +54,8 @@ const signIn = async (req, res, next) => {
     if (!match) {
       return res.status(401).send({ message: 'Not authorised' });
     }
-    let token = newToken(user.dataValues);
+    const token = newToken(user.dataValues);
+    res.cookie('jwt', token);
     return res.status(201).send({ token });
   } catch (error) {
     return next(error);
@@ -62,11 +63,20 @@ const signIn = async (req, res, next) => {
 };
 
 const protect = async (req, res, next) => {
+  // COMMENTED OUT AS USING COOKIES NOT HEADERS
   // check for authorisation header - throw error if not
-  if (!req.headers.authorization) {
+  // if (!req.headers.authorization) {
+  //   return res.status(401).send({ message: 'Not authorised' });
+  // }
+  // const token = req.headers.authorization.split('Bearer ')[1];
+  // if (!token) {
+  //   return res.status(401).send({ message: 'Not authorised' });
+  // }
+
+  if (req.cookies === undefined || !req.cookies.jwt) {
     return res.status(401).send({ message: 'Not authorised' });
   }
-  const token = req.headers.authorization.split('Bearer ')[1];
+  const token = req.cookies.jwt;
   if (!token) {
     return res.status(401).send({ message: 'Not authorised' });
   }
@@ -90,8 +100,26 @@ const protect = async (req, res, next) => {
   }
 };
 
+const checkCookie = async (req, res, next) => {
+  // check for authorisation header - throw error if not
+  if (req.cookies === undefined || !req.cookies.jwt) {
+    return res.status(401).send({ message: 'Not authorised' });
+  }
+  const token = req.cookies.jwt;
+  if (!token) {
+    return res.status(401).send({ message: 'Not authorised' });
+  }
+  try {
+    const payload = await verifyToken(token);
+    return res.status(201).send({ message: 'session active' });
+  } catch (error) {
+    return res.status(401).send({ message: 'Not authorised' });
+  }
+};
+
 module.exports = {
   signUp,
   signIn,
   protect,
+  checkCookie,
 };

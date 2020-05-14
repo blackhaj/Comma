@@ -7,7 +7,7 @@ $darkBlue: #212745;
 * {
   margin: 0;
   padding: 0;
-  border: green solid 1px;
+  // border: green solid 1px;
   font-family: 'Montserrat', sans-serif;
   box-sizing: border-box;
 }
@@ -22,11 +22,12 @@ h1 {
   display: flex;
 }
 
-#appContainer {
+.appContainer {
   height: 667px;
   width: 375px;
   margin: auto;
   position: relative;
+  border: $grey solid 1px;
 }
 
 #main-container {
@@ -44,7 +45,7 @@ h1 {
 
 .title {
   display: flex;
-  margin-left: 10px;
+  margin-left: 30px;
   font-size: 25px;
   font-weight: 600;
   color: $darkBlue;
@@ -55,7 +56,7 @@ h1 {
 }
 
 .account-icon {
-  padding: 10px;
+  padding: 20px;
   display: flex;
 }
 
@@ -77,6 +78,16 @@ h1 {
 //   display: none !important;
 // }
 
+.signin-container {
+  margin: auto;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .navbar-container {
   width: 100%;
   height: 75px;
@@ -87,5 +98,8 @@ h1 {
 
 .nav-item {
   margin: auto;
-  font-size: 1.3rem;
+  font-size: 3rem;
+  text-decoration: none;
 }
+
+button::-moz-focus-inner { border: 0; }

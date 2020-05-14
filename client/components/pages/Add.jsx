@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import TitleBar from '../TitleBar.jsx';
 
 export default class Add extends Component {
   render() {
     return (
       <div>
-        <h1>ADD</h1>
+        <TitleBar title={"Add"} />
       </div>
     )
   }

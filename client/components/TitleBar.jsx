@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Title from './Title.jsx'
 import AccountIcon from './AccountIcon.jsx'
 
-export default class TitleBar extends Component {
-  render() {
-    return (
+export default function TitleBar(props) {
+  return (
+    <div>
       <div className='title-bar'>
-        <Title />
+        <Title title={props.title} />
         <AccountIcon />
       </div>
-    )
-  }
+    </div>
+  )
 }

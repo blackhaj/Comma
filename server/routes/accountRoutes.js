@@ -8,7 +8,12 @@ router
   .get(controllers.readMany)
   .post(controllers.createOne);
 
-// accounts/:id
+// accounts/:id/balances
+router
+  .route('/:id/balances')
+  .get(controllers.readManyBalances);
+
+  // accounts/:id
 router
   .route('/:id')
   .get(controllers.readOne)
