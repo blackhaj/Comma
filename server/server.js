@@ -53,7 +53,6 @@ app.use((err, req, res, next) => {
   res.status(500).send("Something broke!");
 });
 
-console.log(path.resolve(__dirname, "../controllers"));
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
