@@ -4,102 +4,15 @@ $hotPink: #E02542;
 $grey: #B1B1B1;
 $darkBlue: #212745;
 
-* {
-  margin: 0;
-  padding: 0;
-  // border: green solid 1px;
-  font-family: 'Montserrat', sans-serif;
-  box-sizing: border-box;
-}
-
-h1 {
-  color: $lightBlue;
-}
-
-#root {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-}
-
-.appContainer {
-  height: 667px;
-  width: 375px;
-  margin: auto;
-  position: relative;
-  border: $grey solid 1px;
-}
-
-#main-container {
-  height: 100%;
-  width: 100%;
-}
-
-.title-bar {
-  width: 100%;
-  height: 60px;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.title {
-  display: flex;
-  margin-left: 30px;
-  font-size: 25px;
-  font-weight: 600;
-  color: $darkBlue;
-}
-
-.title-text {
-  margin: auto auto 0 auto;
-}
-
-.account-icon {
-  padding: 20px;
-  display: flex;
-}
-
-.profile-icon {
-  margin: auto;
-  height: 35px;
-  width: 35px;
-  fill: $hotPink;
-}
-
-.card {
-  width: 355px;
-  margin: 10px;
-  min-height: 250px;
-  padding: 10px;
-}
-
-// .modebar{
-//   display: none !important;
+// * {
+//   margin: 0;
+//   padding: 0;
+//   // border: green solid 1px;
+//   font-family: 'Montserrat', sans-serif;
+//   box-sizing: border-box;
 // }
-
-.signin-container {
-  margin: auto;
-  width: 200px;
-  height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+main {
+  width: 60%;
+  min-height: 100vh;
+  margin: 0 auto;
 }
-
-.navbar-container {
-  width: 100%;
-  height: 75px;
-  display: flex;
-  position: absolute;
-  bottom: 0px;
-}
-
-.nav-item {
-  margin: auto;
-  font-size: 3rem;
-  text-decoration: none;
-}
-
-button::-moz-focus-inner { border: 0; }
