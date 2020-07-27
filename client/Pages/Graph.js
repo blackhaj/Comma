@@ -36,7 +36,7 @@ export default class Card extends Component {
         config={{displayModeBar: false}}
       />
     } else {
-      output = <h1>Wanker</h1>
+      output = <h1>Test</h1>
     }
 
     return (
