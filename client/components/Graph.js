@@ -44,7 +44,6 @@ export default class Card extends Component {
     return (
       <div className='card'>
         {output}
-        <h1>Henry</h1>
       </div>
     )
   }

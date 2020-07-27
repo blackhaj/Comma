@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
-import Graph from './Graph.js'
+import Graph from '../components/Graph.js'
+import NavBar from '../components/NavBar'
+import Footer from '../components/Footer'
 
 class App extends Component {
   
   render() {
     return (
-        <>
-        <div>
+      <>
+        <NavBar />
+        <main >
           <h1>Account</h1>
           <Graph />
-        </div>
-          
-        </>
+          <button className={'button is-primary'}>Click Me!</button>
+        </main>
+        <Footer />
+      </>
     )
   }
 }
