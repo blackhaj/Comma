@@ -11,6 +11,17 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.jsx?/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+            plugins: ["@babel/plugin-proposal-class-properties"]
+          },
+        },
+      },
+      {
         test: /\.css$/i,
         exclude: /node_modules/,
         use: [
@@ -22,17 +33,6 @@ module.exports = {
             },
           },
         ],
-      },
-      {
-        test: /\.jsx?/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
-            plugins: ["@babel/plugin-proposal-class-properties"]
-          },
-        },
       },
       {
         test: /\.s[ac]ss$/i,
@@ -63,6 +63,9 @@ module.exports = {
     proxy: {
       "/api": "http://localhost:3000",
     },
+    watchOptions: {
+      poll: true
+    }
   },
 
 };
