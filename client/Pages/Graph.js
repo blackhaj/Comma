@@ -8,9 +8,11 @@ export default class Card extends Component {
   }
 
   componentDidMount() {
-    fetch('/api/accounts/2/balances')
+    console.log("Inside component did mount")
+    fetch('/api/accounts/1/balances')
       .then( response => response.json())
       .then( payload => {
+        console.log(payload)
         this.setState({
           fetched: true,
           ...payload
@@ -21,7 +23,7 @@ export default class Card extends Component {
   render() {
     let output;
     if (this.state.fetched){
-      output = <Plot 
+      output = (<Plot 
         data={[
           {
             x: this.state.date,
@@ -32,16 +34,17 @@ export default class Card extends Component {
             fillcolor: '#4BA4F4'
           }
         ]}
-        layout={{width: 320, height: 240, margin: {l: 30, r: 10, b: 30, t: 10}, yaxis: {range: [500,2000]}}}
+        layout={{width: 320, height: 240, margin: {l: 30, r: 10, b: 30, t: 10}, yaxis: {autorange: true}}}
         config={{displayModeBar: false}}
-      />
+      />)
     } else {
-      output = <h1>Test</h1>
+      output = <h1>Loading</h1>
     }
 
     return (
       <div className='card'>
         {output}
+        <h1>Henry</h1>
       </div>
     )
   }

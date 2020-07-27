@@ -5,6 +5,7 @@ const { makeSeries } = require('../scripts/dataAnalysis')
 let controllers = crudControllers(Account);
 
 controllers.readManyBalances = async (req, res, next) => {
+  console.log('READING ACCOUNT BALANCES')
   try {
     let docs = await Balance.findAll({
       where: {
@@ -25,6 +26,7 @@ controllers.readManyBalances = async (req, res, next) => {
 };
 
 controllers.readNetWorth = async (req, res, next) => {
+  console.log("READING NET WORTH")
   try {
     let balances = await Balance.findAll({
       where: {
@@ -41,7 +43,6 @@ controllers.readNetWorth = async (req, res, next) => {
       let date = balance.dataValues.date;
       summed[date] = (summed[date] || 0 ) + Number(balance.dataValues.balance);
     })
-
     let dates =[]
     let worth = []
     Object.keys(summed).forEach((key) => {
