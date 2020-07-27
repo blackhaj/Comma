@@ -11,12 +11,26 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.css$/i,
+        exclude: /node_modules/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            },
+          },
+        ],
+      },
+      {
         test: /\.jsx?/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
           options: {
             presets: ["@babel/preset-env", "@babel/preset-react"],
+            plugins: ["@babel/plugin-proposal-class-properties"]
           },
         },
       },
@@ -50,4 +64,5 @@ module.exports = {
       "/api": "http://localhost:3000",
     },
   },
+
 };
