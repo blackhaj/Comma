@@ -44,6 +44,7 @@ module.exports = {
   Balance,
   Inflow,
   Transfer,
+  sequelize,
 };
 
 
