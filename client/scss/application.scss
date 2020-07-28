@@ -11,8 +11,33 @@ $darkBlue: #212745;
 //   font-family: 'Montserrat', sans-serif;
 //   box-sizing: border-box;
 // }
+
+html {
+  font-size: 14px;
+}
+
 main {
-  width: 60%;
+  width: 50%;
   min-height: 100vh;
   margin: 0 auto;
+  padding-top: 15px;
+  padding-bottom: 30px;
+}
+
+.chart {
+  // width: 75%;
+  margin: 0 auto;
+  display: flex;
+}
+
+.stats-chapter {
+  margin-top: 60px;
+}
+
+.highlighted {
+  background-color: #FFF176;
+}
+
+.chart-loading {
+  margin: auto;
 }
