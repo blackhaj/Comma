@@ -13,11 +13,6 @@ router
   .route('/:id/balances')
   .get(controllers.readManyBalances);
 
-// accounts/networth
-router
-  .route('/networth')
-  .get(controllers.readNetWorth);
-
   // accounts/:id
 router
   .route('/:id')

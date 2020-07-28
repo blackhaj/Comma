@@ -25,34 +25,5 @@ controllers.readManyBalances = async (req, res, next) => {
   }
 };
 
-controllers.readNetWorth = async (req, res, next) => {
-  console.log("READING NET WORTH")
-  try {
-    let balances = await Balance.findAll({
-      where: {
-        userId: req.user.id,
-        deleted: false,
-      },
-    });
-    if (balances.length === 0) {
-      return res.status(400).end();
-    }
-
-    let summed = {}
-    balances.forEach((balance) => {
-      let date = balance.dataValues.date;
-      summed[date] = (summed[date] || 0 ) + Number(balance.dataValues.balance);
-    })
-    let dates =[]
-    let worth = []
-    Object.keys(summed).forEach((key) => {
-      dates.push(key);
-      worth.push(summed[key])
-    })
-    res.status(200).json({ dates, worth });
-  } catch (error) {
-    return next(error);
-  }
-};
 
 module.exports = controllers;
