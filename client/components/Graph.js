@@ -1,53 +1,32 @@
 import React, { Component } from 'react';
-import Plot from 'react-plotly.js';
+import { Line } from 'react-chartjs-2';
 
-export default class Card extends Component {
+export default function Graph(props) {
+  let output;
+  if (props.fetched){
+    let options = {
+      scales: {
+        yAxes: [{
+            ticks: {
+                suggestedMin: 400,
 
-  state = {
-    fetched: false
-  }
-
-  componentDidMount() {
-    console.log("Inside component did mount")
-    fetch('/api/accounts/1/balances')
-      .then( response => response.json())
-      .then( payload => {
-        console.log(payload)
-        this.setState({
-          fetched: true,
-          ...payload
-        })
-      })
-  }
-
-  render() {
-    let output;
-    if (this.state.fetched){
-      output = (<Plot 
-        data={[
-          {
-            x: this.state.date,
-            y: this.state.balance,
-            mode: 'none',
-            type: 'scattergl',
-            fill: 'tozeroy',
-            fillcolor: '#4BA4F4'
-          }
-        ]}
-        layout={{width: 320, height: 240, margin: {l: 30, r: 10, b: 30, t: 10}, yaxis: {autorange: true}}}
-        config={{displayModeBar: false}}
-      />)
-    } else {
-      output = <h1>Loading</h1>
+            }
+        }]
+      },
+      legend:{
+        display:false
+      }
     }
-
-    return (
-      <div className='card'>
-        {output}
-      </div>
-    )
+    output = <Line data={props.data} options={options} />
+  } else {
+    output = <button class="button is-loading chart-loading">Loading</button>
   }
+
+
+  return (
+    <div class='chart'>
+        {output}
+    </div>
+  )
 }
 
-// https://github.com/plotly/react-plotly.js/blob/master/README.md
-// https://plotly.com/javascript/reference/#bar
