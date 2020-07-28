@@ -4,11 +4,12 @@ const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
 
 // Delegated Routers
-const userRouter = require("./routes/userRoutes");
 const accountRouter = require("./routes/accountRoutes");
 const balanceRouter = require("./routes/balanceRoutes");
 const inflowRouter = require("./routes/inflowRoutes");
+const overviewRouter = require("./routes/overviewRoutes");
 const transferRouter = require("./routes/transferRoutes");
+const userRouter = require("./routes/userRoutes");
 const { signUp, signIn, protect, checkCookie } = require("./utils/auth");
 
 // Set up APP
@@ -25,11 +26,12 @@ app.use("/api/signup", signUp);
 app.use("/api/signin", signIn);
 app.use('/api/session', checkCookie);
 app.use("/api", protect);
-app.use("/api/users", userRouter);
 app.use("/api/accounts", accountRouter);
 app.use("/api/balances", balanceRouter);
 app.use("/api/inflows", inflowRouter);
+app.use("/api/overview", overviewRouter);
 app.use("/api/transfers", transferRouter);
+app.use("/api/users", userRouter);
 
 
 // App Routes
