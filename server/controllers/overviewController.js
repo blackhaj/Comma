@@ -60,4 +60,54 @@ controllers.readCurrentAccounts = async (req, res, next) => {
   }
 }
 
+controllers.readLatestBalances = async (req, res, next) => {
+  try {
+    const [balances, meta] = await sequelize.query(`
+    SELECT DISTINCT ON ("accountId") 
+    "accountId", "balance", "date"
+    FROM 
+        balances
+    WHERE
+      "userId" = 1
+    ORDER BY 
+        "accountId", date DESC;`)
+    if (balances.length === 0) {
+      return res.status(400).end();
+    }
+
+    res.status(200).json({ balances });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+controllers.readAllAccountsWithBalances = async (req, res, next) => {
+  try {
+    const [accounts, meta] = await sequelize.query(`
+    SELECT accounts.*, b.balance as "latestBalance"
+    FROM accounts
+    LEFT JOIN (SELECT DISTINCT ON ("accountId") 
+        "accountId", "balance", "date"
+        FROM 
+            balances
+        WHERE
+          "userId" = 1
+        ORDER BY 
+            "accountId", date DESC
+
+    ) as b
+    ON accounts.id=b."accountId"
+    WHERE accounts."userId" = 1 AND accounts.deleted = false`)
+    if (accounts.length === 0) {
+      return res.status(400).end();
+    }
+
+    res.status(200).json({ accounts });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+
+
 module.exports = controllers;

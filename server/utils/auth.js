@@ -55,6 +55,8 @@ const signIn = async (req, res, next) => {
       return res.status(401).send({ message: 'Not authorised' });
     }
     const token = newToken(user.dataValues);
+
+    // Adds to cookies - change to body + add refresh token to cookies
     res.cookie('jwt', token);
     return res.status(201).send({ token });
   } catch (error) {

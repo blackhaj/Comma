@@ -42,3 +42,15 @@ main {
 .chart-loading {
   margin: auto;
 }
+
+.accounts-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.account-card {
+  min-width: 45%;
+  width: 45%;
+  margin: 2.5%;
+  height: 100px;
+}
