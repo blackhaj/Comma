@@ -19,7 +19,10 @@ controllers.readManyBalances = async (req, res, next) => {
     }
     docs = docs.map(doc => doc.dataValues);
     docs = makeSeries(docs, 'date', 'balance')
-    res.status(200).json({ ...docs });
+    res.status(200).json({ 
+      dates: docs.date,  
+      values: docs.balance
+    });
   } catch (error) {
     return next(error);
   }
