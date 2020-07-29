@@ -1,21 +1,21 @@
 const jwt = require("jsonwebtoken");
 const { User } = require("../models/sequelize");
+const { JWT_TOKEN } = require('../../.env.js');
 
 const secrets = {
-  jwt: "donotsharethisshitwithnoone",
   jwtExp: "30d",
 };
 
 // Must be passed a user object with .id key
 const newToken = (user) => {
-  return jwt.sign({ id: user.id }, secrets.jwt, {
+  return jwt.sign({ id: user.id }, JWT_TOKEN, {
     expiresIn: secrets.jwtExp,
   }); // returns a token
 };
 
 const verifyToken = (token) => {
   return new Promise((resolve, reject) => {
-    jwt.verify(token, secrets.jwt, (err, payload) => {
+    jwt.verify(token, JWT_TOKEN, (err, payload) => {
       if (err) return reject(err);
       resolve(payload);
     });
@@ -57,7 +57,7 @@ const signIn = async (req, res, next) => {
     const token = newToken(user.dataValues);
 
     // Adds to cookies - change to body + add refresh token to cookies
-    res.cookie('jwt', token);
+    res.cookie('jwt', token, { httpOnly: true });
     return res.status(201).send({ token });
   } catch (error) {
     return next(error);
