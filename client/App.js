@@ -9,6 +9,7 @@ import Footer from './components/Footer'
 import Home from './Pages/Home'
 import Accounts from './Pages/Accounts'
 import Add from './Pages/Add'
+import Account from './Pages/Account'
 
 class App extends Component {
 
@@ -25,7 +26,8 @@ class App extends Component {
           <main>
             <Route path="/" component={Home} exact />
             <Route path="/accounts" component={Accounts} exact />
-            <Route path="/add" component={Add} exact />  
+            <Route path="/accounts/:name" component={Account} />
+            <Route path="/add" component={Add} exact />
           </main>
           : <h1> Log In</h1> }
         <Footer />
