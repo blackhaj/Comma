@@ -21,11 +21,11 @@ export default class Home extends Component {
 
   componentDidMount() {
     this.getNetWorth();
-    this.getCurretAccountTotals();
+    this.getCurrentAccountTotals();
 
   }
 
-  getCurretAccountTotals() {
+  getCurrentAccountTotals() {
     fetch('/api/overview/currents')
       .then((response) => response.json())
       .then((payload) => {
