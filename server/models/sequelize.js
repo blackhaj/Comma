@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const bcrypt = require('bcryptjs');
 const SALT_WORK_FACTOR = 10;
+const { DB_URL } = require('../../.env.js') 
 
 // import models
 const UserModel = require('./user');
@@ -10,7 +11,7 @@ const InflowModel = require('./inflow');
 const TransferModel = require('./transfer');
 
 // Instantiate the DB
-const sequelize = new Sequelize('postgres://txkssrig:JkSMqInptoHlTPrtIiPUf3iMWXwWGJfy@drona.db.elephantsql.com:5432/txkssrig');
+const sequelize = new Sequelize(DB_URL);
 
 const User = UserModel(sequelize, Sequelize);
 User.beforeCreate((user) => {
