@@ -1,17 +1,4 @@
-$white: #FFFFFF;
-$lightBlue: #4BA4F4;
-$hotPink: #E02542;
-$grey: #B1B1B1;
-$darkBlue: #212745;
-
-// * {
-//   margin: 0;
-//   padding: 0;
-//   // border: green solid 1px;
-//   font-family: 'Montserrat', sans-serif;
-//   box-sizing: border-box;
-// }
-
+// App level
 html {
   font-size: 14px;
 }
@@ -24,6 +11,7 @@ main {
   padding-bottom: 30px;
 }
 
+// Chart
 .chart {
   width: 100%;
   height: 444px;
@@ -31,26 +19,11 @@ main {
   display: flex;
 }
 
-.stats-chapter {
-  margin-top: 60px;
-}
-
-.highlighted {
-  background-color: #FFF176;
-}
-
 .chart-loading {
   margin: auto;
 }
 
-.accounts-list {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.account-card {
-  min-width: 45%;
-  width: 45%;
-  margin: 2.5%;
-  height: 100px;
+// Pages
+.stats-chapter {
+  margin-top: 60px;
 }
