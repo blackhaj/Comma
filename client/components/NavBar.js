@@ -2,14 +2,14 @@ import React from 'react'
 import { Link } from "react-router-dom";
 
 
-export default function NavBar() {
+export default function NavBar(props) {
   return (
     <nav className="navbar is-transparent">
     
       <div className="navbar-brand">
-        <a className="navbar-item" href="#">
-          <img src="#" alt="COMMA" width="112" height="28" />
-        </a>
+        <Link className="navbar-item" to='/'>
+          COMMA
+        </Link>
         <div className="navbar-burger burger" data-target="navbarBurger">
           <span></span>
           <span></span>
@@ -20,22 +20,22 @@ export default function NavBar() {
       <div id="navbarBurger" className="navbar-menu">
         <div className="navbar-start">
           <Link to='/' className="navbar-item" >Home</Link>
-          <Link to='/accounts' className="navbar-item" >Accounts</Link>
+          { props.isUserLoggedIn ? <Link to='/accounts' className="navbar-item" >Accounts</Link> : <></> }
           {/* <Link to='/add' className="navbar-item" >Add</Link> */}
         </div>
-    
-        <div className="navbar-end">
-          <div className="navbar-item">
-            <div className="buttons">
-              <a className="button is-primary">
-                <strong>Sign up</strong>
-              </a>
-              <a className="button is-light">
-                Log in
-              </a>
+        { props.isUserLoggedIn ? 
+          <div className="navbar-end">
+            <div className="navbar-item">
+              <div className="buttons">
+                <Link className="button is-primary" to='/logout'>
+                  <strong>Log Out</strong>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
+          : <></>
+        }
+        
       </div>
     </nav>
   )
