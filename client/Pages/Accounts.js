@@ -12,7 +12,6 @@ export default class Accounts extends Component {
 
   componentDidMount(){
     if (!this.state.fetched) {
-      console.log('getting data')
       this.getAccounts()
     }
   }

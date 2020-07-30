@@ -44,7 +44,10 @@ const signIn = async (req, res, next) => {
     where: {
       email: req.body.email,
       deleted: false,
-    }
+    },
+    attributes: {
+      exclude: ["deleted", "createdAt", "updatedAt"],
+    },
   });
   if (!user) {
     return res.status(401).send({ message: "Not authorised" });
@@ -58,7 +61,10 @@ const signIn = async (req, res, next) => {
 
     // Adds to cookies - change to body + add refresh token to cookies
     res.cookie('jwt', token, { httpOnly: true });
-    return res.status(201).send({ token });
+    return res.status(201).send({ 
+      token, 
+      userId: user.dataValues.id 
+    });
   } catch (error) {
     return next(error);
   }
@@ -84,7 +90,6 @@ const protect = async (req, res, next) => {
   }
   try {
     const payload = await verifyToken(token);
-    console.log("Payload: ", payload)
     const user = await User.findOne({
       where: {
         id: payload.id,

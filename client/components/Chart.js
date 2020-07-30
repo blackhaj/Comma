@@ -19,12 +19,12 @@ export default function Chart(props) {
     }
     output = <Line data={props.data} options={options} />
   } else {
-    output = <button class="button is-loading chart-loading">Loading</button>
+    output = <button className="button is-loading chart-loading">Loading</button>
   }
 
 
   return (
-    <div class='chart'>
+    <div className='chart'>
         {output}
     </div>
   )

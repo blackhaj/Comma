@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import Chart from '../components/Chart.js'
+import { UserContext } from '../UserContext'
 
 export default class Account extends Component {
+
+  static contextType = UserContext;
 
   state = {
     fetched: false,
@@ -11,6 +14,7 @@ export default class Account extends Component {
 
   componentDidMount() {
     this.getAccountBalances();
+    window.scrollTo(0, 0)
   }
 
   getAccountBalances() {
@@ -33,14 +37,17 @@ export default class Account extends Component {
 
   
   render() {
+    const { userID } = this.context
+    
     return (
-      <>
-        <div className="content is-medium stats-chapter" >
-          <h1>{this.props.location.accountName}</h1>
-          <p></p>
-          <Chart data={this.state.data} fetched={this.state.fetched} /> 
-        </div>
-      </>
+          <>
+            <div className="content is-medium stats-chapter" >
+              <h1>{this.props.location.accountName}</h1>
+              <p></p>
+              <Chart data={this.state.data} fetched={this.state.fetched} /> 
+            </div>
+            <h1>{userID}</h1>
+          </>
     )
   }
 }

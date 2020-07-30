@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 
-// onclick function to toggle is-active on .navbar-burger & .navbar-menu
 
 export default function NavBar() {
   return (
@@ -22,7 +21,7 @@ export default function NavBar() {
         <div className="navbar-start">
           <Link to='/' className="navbar-item" >Home</Link>
           <Link to='/accounts' className="navbar-item" >Accounts</Link>
-          <Link to='/add' className="navbar-item" >Add</Link>
+          {/* <Link to='/add' className="navbar-item" >Add</Link> */}
         </div>
     
         <div className="navbar-end">

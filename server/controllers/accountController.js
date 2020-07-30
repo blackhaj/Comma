@@ -5,7 +5,6 @@ const { makeSeries } = require('../scripts/dataAnalysis')
 let controllers = crudControllers(Account);
 
 controllers.readManyBalances = async (req, res, next) => {
-  console.log('READING ACCOUNT BALANCES')
   try {
     let docs = await Balance.findAll({
       where: {

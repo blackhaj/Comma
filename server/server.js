@@ -37,11 +37,12 @@ app.use("/api/users", userRouter);
 // App Routes
 if (process.env.NODE_ENV === "production") {
   app.use("/build", express.static(path.join(__dirname, "../build")));
-  app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../index.html'));
-  });
+  
 }
 
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../index.html'));
+});
 
 
 // 404 Handler

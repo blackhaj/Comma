@@ -64,7 +64,6 @@ export default class Home extends Component {
   }
 
   render() {
-    console.log("STATE", this.state)
     return (
       <>
         <div className="content is-medium stats-chapter" >
