@@ -37,7 +37,10 @@ controllers.readNetWorth = async (req, res, next) => {
 
 controllers.readCurrentAccounts = async (req, res, next) => {
   try {
-    const [balances, meta] = await sequelize.query(`SELECT * FROM Balances WHERE "accountId" in (SELECT id from Accounts WHERE "userId" = 1 AND "accountType" = 'current')`)
+    const userId = req.user.id;
+    const [balances, meta] = await sequelize.query(`SELECT * FROM Balances WHERE "accountId" in (SELECT id from Accounts WHERE "userId" = :userId AND "accountType" = 'current')`, {
+      replacements: { userId: userId }
+    })
 
     if (balances.length === 0) {
       return res.status(400).end();
@@ -62,15 +65,18 @@ controllers.readCurrentAccounts = async (req, res, next) => {
 
 controllers.readLatestBalances = async (req, res, next) => {
   try {
+    const userId = req.user.id;
     const [balances, meta] = await sequelize.query(`
     SELECT DISTINCT ON ("accountId") 
     "accountId", "balance", "date"
     FROM 
         balances
     WHERE
-      "userId" = 1
+      "userId" = :userId
     ORDER BY 
-        "accountId", date DESC;`)
+        "accountId", date DESC;`,{
+          replacements: {userId},
+        })
     if (balances.length === 0) {
       return res.status(400).end();
     }
@@ -83,6 +89,7 @@ controllers.readLatestBalances = async (req, res, next) => {
 
 controllers.readAllAccountsWithBalances = async (req, res, next) => {
   try {
+    const userId = req.user.id;
     const [accounts, meta] = await sequelize.query(`
     SELECT accounts.*, b.balance as "latestBalance"
     FROM accounts
@@ -97,7 +104,9 @@ controllers.readAllAccountsWithBalances = async (req, res, next) => {
 
     ) as b
     ON accounts.id=b."accountId"
-    WHERE accounts."userId" = 1 AND accounts.deleted = false`)
+    WHERE accounts."userId" = 1 AND accounts.deleted = false`, {
+      replacements: {userId},
+    })
     if (accounts.length === 0) {
       return res.status(400).end();
     }
