@@ -19,17 +19,32 @@ class App extends Component {
 
   state = {
     userData: {
-      isLoggedIn: true,
+      isLoggedIn: false,
       userId: null,
       token: null,
     }
   }
 
-  logInUser(email, password){
-    fetch('/api/signin')
+  logInUser = (email, password) => {
+    console.log("LOGGING IN USER")
+    fetch('/api/signin', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password})
+    })
       .then((response) => response.json())
       .then((payload) => {
-        this.setState(payload);
+        console.log("THIS", this)
+        console.log("HERE IS THE PAYLOAD", payload)
+        this.setState({
+          userData: {
+            isLoggedIn: true,
+            ...payload
+          }
+        });
       })
       .catch((error) => console.error(error))
   }
@@ -39,6 +54,7 @@ class App extends Component {
   
   render() {
     const { userID } = this.state.userData;
+    console.log(this.state)
 
     return (
       <UserContext.Provider value={{
@@ -48,7 +64,7 @@ class App extends Component {
         
         <Router >
           
-          <NavBar />
+          <NavBar isUserLoggedIn={this.state.userData.isLoggedIn} />
             <main>
               {this.state.userData.isLoggedIn ? 
                   <>
