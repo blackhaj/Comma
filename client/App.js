@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 // Component imports
 import NavBar from './components/NavBar'
@@ -8,10 +8,10 @@ import Footer from './components/Footer'
 // Page imports
 import Home from './Pages/Home'
 import Accounts from './Pages/Accounts'
-import Add from './Pages/Add'
 import Account from './Pages/Account'
 import Login from './Pages/Login'
 
+// User Context
 import { UserContext } from './UserContext'
 
 
@@ -22,9 +22,31 @@ class App extends Component {
       isLoggedIn: false,
       userId: null,
       token: null,
-    }
-  }
+    },
+    // netWorth: {
+    //   fetched: false,
+    //   data: {
+    //     labels: null,
+    //     datasets: [{
+    //       data: null,
+    //       backgroundColor: "#E362A0",
+    //     }]
+    //   }
+    // },
+    // currentAccounts: {
+    //   fetched: false,
+    //   data: {
+    //     labels: null,
+    //     datasets: [{
+    //       data: null,
+    //       backgroundColor: "#548ADC",
+    //     }]
+    //   }
+    // }
 
+  }
+  
+  // Method to login user and update state with details
   logInUser = (email, password) => {
     console.log("LOGGING IN USER")
     fetch('/api/signin', {
@@ -37,8 +59,6 @@ class App extends Component {
     })
       .then((response) => response.json())
       .then((payload) => {
-        console.log("THIS", this)
-        console.log("HERE IS THE PAYLOAD", payload)
         this.setState({
           userData: {
             isLoggedIn: true,
@@ -49,21 +69,16 @@ class App extends Component {
       .catch((error) => console.error(error))
   }
 
-  // Load login page
-  // onSubmit logs in user and updates APP level state with user details
-  
   render() {
-    const { userID } = this.state.userData;
-    console.log(this.state)
-
     return (
+      // Pass down user context
       <UserContext.Provider value={{
         userData: this.state.userData, 
-        logInUser:this.logInUser,
+        logInUser: this.logInUser,
         }}>
         
+        {/* If logged in, render main routes else render login page */}
         <Router >
-          
           <NavBar isUserLoggedIn={this.state.userData.isLoggedIn} />
             <main>
               {this.state.userData.isLoggedIn ? 
@@ -71,7 +86,6 @@ class App extends Component {
                     <Route path="/" component={Home} exact />
                     <Route path="/accounts" component={Accounts} exact />
                     <Route path="/accounts/:name" component={Account} />
-                    <Route path="/add" component={Add} exact />
                   </>
                 : <Login /> }
             </main>

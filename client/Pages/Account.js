@@ -3,7 +3,6 @@ import Chart from '../components/Chart.js'
 import { UserContext } from '../UserContext'
 
 export default class Account extends Component {
-
   static contextType = UserContext;
 
   state = {
@@ -17,8 +16,13 @@ export default class Account extends Component {
     window.scrollTo(0, 0)
   }
 
+  // Get balances for specific account
   getAccountBalances() {
-    fetch(`/api/accounts/${this.accountID}/balances`)
+    fetch(`/api/accounts/${this.accountID}/balances`,{
+      headers: {
+        'Authorization': `Bearer ${this.context.userData.token}`
+      }
+    })
       .then((response) => response.json())
       .then((payload) => {
         this.setState({
@@ -37,8 +41,6 @@ export default class Account extends Component {
 
   
   render() {
-    const { userID } = this.context
-    
     return (
           <>
             <div className="content is-medium stats-chapter" >
@@ -46,7 +48,6 @@ export default class Account extends Component {
               <p></p>
               <Chart data={this.state.data} fetched={this.state.fetched} /> 
             </div>
-            <h1>{userID}</h1>
           </>
     )
   }

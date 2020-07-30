@@ -9,8 +9,8 @@ export default function AccountCard(props) {
     accountName: props.name,
   }
 
+  // Renders an account card for the Accounts page
   return (
-    
       <div className="tile is-parent">
         <article className={`tile is-child notification ${props.color}`}>
           <Link to={linkConfig} className={'no-underline'} style={{"textDecoration": "none"}} >

@@ -6,7 +6,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
+  // Form captures user input onChange and submits to logInUser from context API
   return (
     <form className={'login-panel'} onSubmit={(event) => {
       event.preventDefault()
