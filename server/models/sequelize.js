@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const bcrypt = require('bcryptjs');
 const SALT_WORK_FACTOR = 10;
-const { DB_URL } = require('../../.env.js') 
+const DB_URL = process.env.DB_URL || require('../../.env.js').DB_URL;
 
 // import models
 const UserModel = require('./user');

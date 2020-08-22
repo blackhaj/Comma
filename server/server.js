@@ -14,7 +14,7 @@ const { signUp, signIn, protect, checkCookie } = require("./utils/auth");
 
 // Set up APP
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Global Middleware
 app.use(bodyParser.json());

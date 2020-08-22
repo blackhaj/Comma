@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { User } = require("../models/sequelize");
-const { JWT_TOKEN } = require('../../.env.js');
+const JWT_TOKEN = process.env.JWT_TOKEN || require('../../.env.js').JWT_TOKEN;
 
 const secrets = {
   jwtExp: "30d",
