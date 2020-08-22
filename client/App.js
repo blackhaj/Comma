@@ -23,26 +23,6 @@ class App extends Component {
       userId: null,
       token: null,
     },
-    // netWorth: {
-    //   fetched: false,
-    //   data: {
-    //     labels: null,
-    //     datasets: [{
-    //       data: null,
-    //       backgroundColor: "#E362A0",
-    //     }]
-    //   }
-    // },
-    // currentAccounts: {
-    //   fetched: false,
-    //   data: {
-    //     labels: null,
-    //     datasets: [{
-    //       data: null,
-    //       backgroundColor: "#548ADC",
-    //     }]
-    //   }
-    // }
 
   }
   

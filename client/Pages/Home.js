@@ -52,7 +52,7 @@ export default class Home extends Component {
     .catch((error) => console.log('There was an error -->', error))
   }
 
-  // Fetch current accounts balances
+  // Fetch current accounts balances - TODO could be negated with additional computations on first call
   getCurrentAccountTotals() {
     fetch('/api/overview/currents', {
         headers: {
@@ -82,7 +82,7 @@ export default class Home extends Component {
       <>
         <div className="content is-medium stats-chapter" >
           <h1>💰Net Worth</h1>
-          <p>Your net worth change by <RoughNotation type="highlight" color={'#FFF176'} show={true}>£1,000</RoughNotation> over the last month. Score 💪🏼. That's a 0.5% increase. Keep going like that and <RoughNotation type="underline" color={'#F44336'} show={true}>you will be worth £120,000 in 20 years</RoughNotation>. You can check out your net worth chart below.</p>
+          <p>Your net worth change by <RoughNotation type="highlight" color={'#FFF176'} show={true}>£1,000</RoughNotation> over the last month. That's a 0.5% increase. Keep going like that and <RoughNotation type="underline" color={'#F44336'} show={true}>you will be worth £120,000 in 20 years</RoughNotation>. You can check out your net worth chart below.</p>
           <Chart data={this.state.netWorth.data} fetched={this.state.netWorth.fetched} /> 
         </div>
         
