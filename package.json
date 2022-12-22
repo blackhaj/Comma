@@ -27,7 +27,7 @@
     "cookie-parser": "^1.4.5",
     "core-js": "^3.6.5",
     "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "pg": "^8.0.3",
     "pg-hstore": "^2.3.3",
     "plotly.js": "^1.54.1",
